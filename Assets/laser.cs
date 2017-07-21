@@ -123,9 +123,15 @@ public class laser : MonoBehaviour
     {
         Ray raycast = new Ray(transform.position, transform.forward);
 
+
+
         RaycastHit hitObject;
-        bool rayHit = Physics.Raycast(raycast, out hitObject);
-      
+        bool rayHit = Physics.Raycast(raycast, out hitObject, length);
+
+        //if (Physics.Raycast(transform.position, transform.forward, length))
+        //    hitObject.collider.gameObject.SendMessageUpwards("ApplyDamage", SendMessageOptions.DontRequireReceiver);
+
+
         if (rayHit && hitObject.collider.GetComponent<Balloon>() != null)
         {
             Debug.Log("BALLOON! Wheeeeee");
