@@ -11,7 +11,7 @@ public class laser : MonoBehaviour
     }
 
     public Color color;
-    public float thickness = 0.002f;
+    public static float thickness = 0.002f;
     public AxisType facingAxis = AxisType.XAxis;
     public float length = 100f;
     public bool showCursor = true;
@@ -67,6 +67,7 @@ public class laser : MonoBehaviour
         pointer.GetComponent<BoxCollider>().isTrigger = true;
         pointer.AddComponent<Rigidbody>().isKinematic = true;
         pointer.layer = 2;
+
 
         if (showCursor)
         {
