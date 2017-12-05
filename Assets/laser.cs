@@ -7,12 +7,15 @@ public class laser : MonoBehaviour
     public enum AxisType
     {
         XAxis,
-        ZAxis
+        ZAxis,
+        orthotic
     }
 
     public Color color;
-    public static float thickness = 0.002f;
-    public AxisType facingAxis = AxisType.XAxis;
+    
+    public float angle;
+    public static float thickness = 0.02f;
+    public AxisType facingAxis = AxisType.orthotic;
     public float length = 100f;
     public bool showCursor = true;
 
@@ -21,8 +24,10 @@ public class laser : MonoBehaviour
     GameObject cursor;
 
     Vector3 cursorScale = new Vector3(0.05f, 0.05f, 0.05f);
+    Vector3 orient = new Vector3(0, 0, 0.015f);
     float contactDistance = 0f;
     Transform contactTarget = null;
+    private string filePath = "coords.txt";
 
     void SetPointerTransform(float setLength, float setThicknes)
     {
@@ -38,6 +43,8 @@ public class laser : MonoBehaviour
                 cursor.transform.localPosition = new Vector3(setLength - cursor.transform.localScale.x, 0f, 0f);
             }
         }
+        
+
         else
         {
             pointer.transform.localScale = new Vector3(setThicknes, setThicknes, setLength);
@@ -122,14 +129,17 @@ public class laser : MonoBehaviour
 
     void Update()
     {
-        Ray raycast = new Ray(transform.position, transform.forward);
 
+        Ray raycast = new Ray(transform.position, transform.forward);
+        
         RaycastHit hitObject;
-        bool rayHit = Physics.Raycast(raycast, out hitObject, length);
+        bool rayHit = Physics.Raycast(raycast, out hitObject, 1);
 
         if (rayHit && hitObject.collider.GetComponent<Balloon>() != null)
         {
             Debug.Log("BALLOON! Wheeeeee");
+            //Debug.Log(hitObject.transform.position);
+            System.IO.File.AppendAllText(filePath, hitObject.transform.position.ToString() + System.Environment.NewLine);
             hitObject.collider.gameObject.SendMessageUpwards("ApplyDamage", SendMessageOptions.DontRequireReceiver);
             scoreManager.score += 10;
         }
