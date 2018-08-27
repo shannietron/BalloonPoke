@@ -68,6 +68,7 @@ public class laser : MonoBehaviour
         holder.transform.localPosition = Vector3.zero;
 
         pointer = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        pointer.name = "laserpointer";
         pointer.transform.parent = holder.transform;
         pointer.GetComponent<MeshRenderer>().material = newMaterial;
 
@@ -140,7 +141,7 @@ public class laser : MonoBehaviour
             Debug.Log("BALLOON! Wheeeeee");
             //Debug.Log(hitObject.transform.position);
             System.IO.File.AppendAllText(filePath, hitObject.transform.position.ToString() + System.Environment.NewLine);
-            hitObject.collider.gameObject.SendMessageUpwards("ApplyDamage", SendMessageOptions.DontRequireReceiver);
+           // hitObject.collider.gameObject.SendMessageUpwards("ApplyDamage", SendMessageOptions.DontRequireReceiver);
             scoreManager.score += 10;
         }
 
