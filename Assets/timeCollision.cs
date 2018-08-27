@@ -1,11 +1,11 @@
-﻿using System.Collections;
+﻿using System.Collections; 
 using System.Collections.Generic;
 using UnityEngine;
 
 public class timeCollision : MonoBehaviour {
 
-    public static int numFrames = 45; //number of frames to capture @ 90fps, 45=0.5sec
-    private int count = 0;
+    public static float delayDestroy = 0.1f; //time in seconds before balloon gets destroyed
+    private float duration = 0;
 
     // Use this for initialization
     void Start () {
@@ -23,30 +23,27 @@ public class timeCollision : MonoBehaviour {
     {
         GetComponent<Renderer>().material.color = Color.green;
         //Debug.Log(gameObject.name + "was triggered by!" + other.gameObject.name);
-        count = 0;
+        duration = 0;
     }
 
     private void OnTriggerExit(Collider other)
     {
         GetComponent<Renderer>().material.color = Color.red;
         //Debug.Log(gameObject.name + "was triggered by!" + other.gameObject.name);
-        count = 0;
-
+        duration = 0;
     }
 
 
 
     void OnTriggerStay(Collider other)
     {
-       count++;
-        //Debug.Log("count:" + count);
-        Transform trans = other.transform;
-        if (count == numFrames)
+        duration = Time.deltaTime + duration;
+        //Debug.Log(duration);
+        if(duration > delayDestroy)
         {
-            count = 0;
+            duration = 0;
             SendMessageUpwards("ApplyDamage", SendMessageOptions.DontRequireReceiver);
         }
-
     }
 
 
