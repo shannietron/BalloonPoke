@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class timeCollision : MonoBehaviour {
 
-    public static float delayDestroy = 0.1f; //time in seconds before balloon gets destroyed
+    public static float delayDestroy = 0.2f; //time in seconds before balloon gets destroyed
+    public static float delayThreshold = 0.1f;
     private float duration = 0;
     private Renderer rend;
     private Shader originalShader;
@@ -35,6 +36,10 @@ public class timeCollision : MonoBehaviour {
     {
         GetComponent<Renderer>().material.shader = originalShader;
         //Debug.Log(gameObject.name + "was triggered by!" + other.gameObject.name);
+        if (duration > delayThreshold)
+        {
+            logger.logCoords(Time.time, transform, false,duration); //failed to destroy balloon
+        }
         duration = 0;
     }
 
@@ -47,6 +52,7 @@ public class timeCollision : MonoBehaviour {
         if(duration > delayDestroy)
         {
             duration = 0;
+            logger.logCoords(Time.time, transform,true); //successfully destroyed balloon
             SendMessageUpwards("ApplyDamage", SendMessageOptions.DontRequireReceiver);
         }
     }

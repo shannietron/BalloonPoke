@@ -12,7 +12,7 @@ public class laser : MonoBehaviour
     }
 
     public Color color;
-    
+
     public float angle;
     public static float thickness = 0.02f;
     public AxisType facingAxis = AxisType.orthotic;
@@ -27,7 +27,6 @@ public class laser : MonoBehaviour
     Vector3 orient = new Vector3(0, 0, 0.015f);
     float contactDistance = 0f;
     Transform contactTarget = null;
-    private string filePath = "coords.txt";
 
     void SetPointerTransform(float setLength, float setThicknes)
     {
@@ -43,7 +42,7 @@ public class laser : MonoBehaviour
                 cursor.transform.localPosition = new Vector3(setLength - cursor.transform.localScale.x, 0f, 0f);
             }
         }
-        
+
 
         else
         {
@@ -132,7 +131,7 @@ public class laser : MonoBehaviour
     {
 
         Ray raycast = new Ray(transform.position, transform.forward);
-        
+
         RaycastHit hitObject;
         bool rayHit = Physics.Raycast(raycast, out hitObject, 1);
 
@@ -140,8 +139,7 @@ public class laser : MonoBehaviour
         {
             Debug.Log("BALLOON! Wheeeeee");
             //Debug.Log(hitObject.transform.position);
-            System.IO.File.AppendAllText(filePath, hitObject.transform.position.ToString() + System.Environment.NewLine);
-           // hitObject.collider.gameObject.SendMessageUpwards("ApplyDamage", SendMessageOptions.DontRequireReceiver);
+            // hitObject.collider.gameObject.SendMessageUpwards("ApplyDamage", SendMessageOptions.DontRequireReceiver);
             scoreManager.score += 10;
         }
 
