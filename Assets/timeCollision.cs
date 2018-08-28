@@ -10,6 +10,7 @@ public class timeCollision : MonoBehaviour {
     private Renderer rend;
     private Shader originalShader;
     private Shader highlightShader;
+    private float myScale;
 
 
     // Use this for initialization
@@ -23,10 +24,12 @@ public class timeCollision : MonoBehaviour {
 		
 	}
 
-    public void setDelay(float threshold,float destroy)
+    public void setBalloonParams(float threshold,float destroy,float scale)
     {
         delayDestroy = destroy;
         delayThreshold = threshold;
+        myScale = scale;
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,7 +46,7 @@ public class timeCollision : MonoBehaviour {
         //Debug.Log(gameObject.name + "was triggered by!" + other.gameObject.name);
         if (duration > delayThreshold)
         {
-            logger.logCoords(Time.time, transform, false,duration); //failed to destroy balloon
+            logger.logCoords(Time.time, transform, false,duration,myScale); //failed to destroy balloon
         }
         duration = 0;
     }
@@ -57,7 +60,7 @@ public class timeCollision : MonoBehaviour {
         if(duration > delayDestroy)
         {
 
-            logger.logCoords(Time.time, transform,true,duration); //successfully destroyed balloon
+            logger.logCoords(Time.time, transform,true,duration,myScale); //successfully destroyed balloon
             duration = 0;
             SendMessageUpwards("ApplyDamage", SendMessageOptions.DontRequireReceiver);
         }

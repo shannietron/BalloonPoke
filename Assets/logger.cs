@@ -24,15 +24,15 @@ public class logger : MonoBehaviour {
         System.IO.File.AppendAllText(TrackerfilePath, Time.time.ToString()+','+ transform.position.x.ToString() + ',' + transform.position.y.ToString() + ',' + transform.position.z.ToString() + System.Environment.NewLine);
     }
 
-    public static void logCoords(float logTime,Transform logTransform,bool success,float logDuration)
+    public static void logCoords(float logTime,Transform logTransform,bool success,float logDuration,float myScale)
     {
         if (success)
         {
-            System.IO.File.AppendAllText(TargetSuccessfilePath, logTime.ToString() + ',' + logDuration.ToString() + ',' + logTransform.position.x.ToString() + ',' + logTransform.position.y.ToString() + ',' + logTransform.position.z.ToString() + System.Environment.NewLine);
+            System.IO.File.AppendAllText(TargetSuccessfilePath, logTime.ToString() + ',' + myScale.ToString() + ',' + logDuration.ToString() + ',' + logTransform.position.x.ToString() + ',' + logTransform.position.y.ToString() + ',' + logTransform.position.z.ToString() + System.Environment.NewLine);
         }
         else
         {
-            System.IO.File.AppendAllText(TargetFailfilePath, logTime.ToString() + ',' + logDuration.ToString() + ',' + logTransform.position.x.ToString() + ',' + logTransform.position.y.ToString() + ',' + logTransform.position.z.ToString() + System.Environment.NewLine);
+            System.IO.File.AppendAllText(TargetFailfilePath, logTime.ToString() + ',' + myScale.ToString() + ',' + logDuration.ToString() + ',' + logTransform.position.x.ToString() + ',' + logTransform.position.y.ToString() + ',' + logTransform.position.z.ToString() + System.Environment.NewLine);
         }
     }
 }

@@ -42,7 +42,8 @@ namespace Valve.VR.InteractionSystem
             Vector3 pos = center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2), Random.Range(-size.z / 2, size.z / 2));
             GameObject balloon = Instantiate(balloonPrefab, pos, Quaternion.identity);
             balloon.GetComponentInChildren<Balloon>().SetColor(color);
-            balloon.GetComponentInChildren<timeCollision>().setDelay(delayThreshold, delayDestroy);
+            balloon.GetComponentInChildren<timeCollision>().setBalloonParams(delayThreshold, delayDestroy,scale);
+            balloon.transform.localScale = new Vector3(scale, scale, scale);
 
         }
 
