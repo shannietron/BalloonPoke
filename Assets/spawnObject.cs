@@ -8,6 +8,9 @@ namespace Valve.VR.InteractionSystem
 
         public float minSpawnTime = 0f;
         public float maxSpawnTime = 0.5f;
+        public float scale = 1f;
+        public float delayDestroy = 0.01f;
+        public float delayThreshold = 0.1f;
         public GameObject balloonPrefab;
         public Vector3 size;
         public Vector3 offset; //Offset from the HMD position at the start of the game.
@@ -39,7 +42,9 @@ namespace Valve.VR.InteractionSystem
             Vector3 pos = center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2), Random.Range(-size.z / 2, size.z / 2));
             GameObject balloon = Instantiate(balloonPrefab, pos, Quaternion.identity);
             balloon.GetComponentInChildren<Balloon>().SetColor(color);
-            }
+            balloon.GetComponentInChildren<timeCollision>().setDelay(delayThreshold, delayDestroy);
+
+        }
 
         public void OnDrawGizmosSelected()
         {
