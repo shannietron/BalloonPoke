@@ -46,8 +46,8 @@ public class laser : MonoBehaviour
 
         else
         {
-            pointer.transform.localScale = new Vector3(setThicknes, setThicknes, setLength);
-            pointer.transform.localPosition = new Vector3(0f, 0f, beamPosition);
+            pointer.transform.localScale = new Vector3(setThicknes, setLength, setThicknes);
+            pointer.transform.localPosition = new Vector3(0f, beamPosition, 0f);
 
             if (showCursor)
             {
