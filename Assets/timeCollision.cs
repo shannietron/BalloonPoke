@@ -1,7 +1,6 @@
 ﻿using System.Collections; 
 using System.Collections.Generic;
 using UnityEngine;
-
 public class timeCollision : MonoBehaviour {
 
     public  float delayDestroy; //time in seconds before balloon gets destroyed
@@ -12,11 +11,9 @@ public class timeCollision : MonoBehaviour {
     private Shader highlightShader;
     private float myScale;
 
-
     // Use this for initialization
     void Start () {
         highlightShader = Shader.Find("Flare");
-
     }
 	
 	// Update is called once per frame
